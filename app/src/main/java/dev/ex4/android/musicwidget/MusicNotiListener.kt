@@ -19,8 +19,8 @@ import android.widget.Toast
 class MusicNotiListener : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        val toast = Toast(applicationContext)
-        if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return; // Check for media notification
+        if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return // Check for media notification
+
         latestNotification = sbn.notification;
         Log.i("MW", "New song notification: " + sbn.notification.tickerText)
 
@@ -36,6 +36,22 @@ class MusicNotiListener : NotificationListenerService() {
             ), views
         ) */
 
+        reloadWidget()
+
+    }
+
+    override fun onNotificationRemoved(sbn: StatusBarNotification) {
+        if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return
+
+        if (latestNotification != null)
+            if (sbn.notification.tickerText.equals(latestNotification?.tickerText)) {
+                latestNotification = null;
+            }
+        reloadWidget()
+
+    }
+
+    private fun reloadWidget() {
         val intent = Intent(this, MusicWidgetProvider::class.java)
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(ComponentName(

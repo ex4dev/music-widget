@@ -19,14 +19,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
         if (appWidgetIds == null) return // No widgets
         if (appWidgetManager == null) return
         for (appWidgetId in appWidgetIds) {
-            // open main
-            val intent = Intent(context, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
             val views = RemoteViews(context?.packageName, R.layout.music_widget)
-            views.setOnClickPendingIntent(R.id.titleText, pendingIntent)
 
             val noti = MusicNotiListener.latestNotification;
+
+            val intent = Intent(context, MainActivity::class.java)
 
             if (noti != null) {
                 // Update song name on widget
@@ -40,6 +37,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 var backIntent: PendingIntent? = null
                 var playPauseIntent: PendingIntent? = null
                 var forwardIntent: PendingIntent? = null
+                var openAppIntent: PendingIntent? = null
+
                 for (action in noti.actions) {
                     Log.v("MusicNotificationListener", "Action: " + action.title)
                     if (action.title.toString().lowercase().contains("previous")) backIntent =
@@ -55,14 +54,23 @@ class MusicWidgetProvider : AppWidgetProvider() {
                     else if (action.title == "Next") forwardIntent = action.actionIntent
                 }
 
+                openAppIntent = noti.contentIntent
+
                 if (backIntent != null) views.setOnClickPendingIntent(R.id.back_button, backIntent)
-                if (playPauseIntent != null) views.setOnClickPendingIntent(
-                    R.id.play_button,
-                    playPauseIntent
-                )
-                if (forwardIntent != null) views.setOnClickPendingIntent(
-                    R.id.next_button,
-                    forwardIntent
+                if (playPauseIntent != null) views.setOnClickPendingIntent(R.id.play_button, playPauseIntent)
+                if (forwardIntent != null) views.setOnClickPendingIntent(R.id.next_button, forwardIntent)
+                if (openAppIntent != null) {
+                    views.setOnClickPendingIntent(R.id.titleText, openAppIntent)
+                    views.setOnClickPendingIntent(R.id.music_widget_layout, openAppIntent)
+                }
+            } else {
+                // When no music, the text just opens the Music Widget app
+                val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+                views.setOnClickPendingIntent(R.id.titleText, pendingIntent)
+                // If no notification
+                views.setTextViewText(
+                    R.id.titleText,
+                    "No media playing"
                 )
             }
 
