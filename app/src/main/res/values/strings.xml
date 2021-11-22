@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Music Widget</string>
+    <string name="permission_explainer_text">This app needs access to your notifications to view the current song.</string>
 </resources>

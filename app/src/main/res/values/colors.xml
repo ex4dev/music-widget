@@ -10,4 +10,5 @@
     <color name="main_200">@android:color/system_accent1_200</color>
     <color name="main_300">@android:color/system_accent1_300</color>
     <color name="main_500">@android:color/system_accent1_500</color>
+    <color name="main_800">@android:color/system_accent1_800</color>
 </resources>
