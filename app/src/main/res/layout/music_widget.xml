@@ -18,16 +18,20 @@
             android:layout_toLeftOf="@id/titleText"
             android:contentDescription="Album artwork"
             android:maxHeight="128px"
-            android:maxWidth="128px"/>
+            android:maxWidth="128px"
+            android:background="@drawable/rounded_button"
+            android:clipToOutline="true"/>
+
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:textColor="?attr/colorOnPrimary"
+            android:layout_centerVertical="true"
             android:paddingHorizontal="10dp"
-            android:text="Widget Text" />
+            android:text="Please wait"
+            android:textColor="?attr/colorOnPrimary" />
     </RelativeLayout>
 
     <RelativeLayout
