@@ -53,20 +53,24 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 var playPauseIntent: PendingIntent? = null
                 var forwardIntent: PendingIntent? = null
                 var openAppIntent: PendingIntent? = null
+                var playPauseIcon: String? = "play"
 
                 for (action in noti.actions) {
                     Log.v("MusicNotificationListener", "Action: " + action.title)
-                    if (action.title.toString().lowercase().contains("previous")) backIntent =
-                        action.actionIntent
-                    if (action.title.toString().lowercase()
-                            .contains("play") || action.title.toString().lowercase()
-                            .contains("pause")
-                    ) {
-                        playPauseIntent = action.actionIntent
+                    when {
+                        action.title.toString().lowercase().contains("previous") -> backIntent =
+                            action.actionIntent
+                        action.title.toString().lowercase().contains("play") -> {
+                            playPauseIntent = action.actionIntent
+                            playPauseIcon = "play"
+                        }
+                        action.title.toString().lowercase().contains("pause") -> {
+                            playPauseIntent = action.actionIntent
+                            playPauseIcon = "pause"
+                        }
+                        action.title.toString().lowercase().contains("next") -> forwardIntent =
+                            action.actionIntent
                     }
-                    if (action.title.toString().lowercase().contains("next")) forwardIntent =
-                        action.actionIntent
-                    else if (action.title == "Next") forwardIntent = action.actionIntent
                 }
 
                 openAppIntent = noti.contentIntent
@@ -84,6 +88,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
                     views.setOnClickPendingIntent(R.id.titleText, openAppIntent)
                     views.setOnClickPendingIntent(R.id.music_widget_layout, openAppIntent)
                 }
+                if (playPauseIcon == "pause") views.setImageViewResource(R.id.play_button, R.drawable.pause_icon)
+                else views.setImageViewResource(R.id.play_button, R.drawable.play_icon)
             } else {
                 // When no music, the text just opens the Music Widget app
                 val pendingIntent =
