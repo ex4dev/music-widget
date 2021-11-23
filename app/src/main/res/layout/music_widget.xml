@@ -7,19 +7,33 @@
     android:background="?attr/colorPrimary"
     android:padding="15dp">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="?attr/colorOnPrimary"
-        android:text="Widget Text" />
+    <RelativeLayout
+        android:id="@+id/titleSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/musicThumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/titleText"
+            android:contentDescription="Album artwork"
+            android:maxHeight="128px"
+            android:maxWidth="128px"/>
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:textColor="?attr/colorOnPrimary"
+            android:paddingHorizontal="10dp"
+            android:text="Widget Text" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleText"
+        android:layout_below="@+id/titleSection"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 

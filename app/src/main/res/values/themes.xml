@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MusicWidget" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/main_300</item> <!-- Background color in widget -->
+        <item name="colorPrimary">@color/a2_50</item> <!-- Background color in widget -->
         <item name="colorPrimaryVariant">@color/main_800</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
