@@ -6,6 +6,7 @@
     android:minResizeWidth="110dp"
     android:resizeMode="vertical|horizontal"
     android:updatePeriodMillis="3600000"
-    android:widgetCategory="home_screen">
+    android:widgetCategory="home_screen"
+    android:previewLayout="@layout/music_widget">
     <!-- minWidth = The default width when creating widget, minResizeWidth = the actual minimum -->
 </appwidget-provider>
