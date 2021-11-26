@@ -11,23 +11,23 @@
         android:id="@+id/titleSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/musicThumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/titleText"
-            android:contentDescription="Album artwork"
-            android:maxHeight="128px"
-            android:maxWidth="128px"
+            android:layout_alignParentLeft="true"
             android:background="@drawable/rounded_button"
-            android:clipToOutline="true"/>
+            android:clipToOutline="true"
+            android:contentDescription="Album artwork"
+            android:maxWidth="128px"
+            android:maxHeight="128px"/>
 
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/musicThumbnail"
             android:layout_centerVertical="true"
             android:paddingHorizontal="10dp"
             android:text="Please wait"
