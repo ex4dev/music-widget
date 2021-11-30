@@ -6,14 +6,8 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.media.session.MediaController
-import android.media.session.MediaSession
-import android.media.session.MediaSessionManager
-import android.os.SystemClock
 import android.util.Log
-import android.view.KeyEvent
 import android.widget.RemoteViews
-import android.widget.Toast
 
 class MusicWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(
@@ -28,8 +22,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
             val noti = MusicNotiListener.latestNotification;
 
-            val intent = Intent(context, MainActivity::class.java)
+            val openSettingsIntent = Intent(context, MainActivity::class.java)
+            val openSettingsPendingIntent =
+                PendingIntent.getActivity(context, 0, openSettingsIntent, PendingIntent.FLAG_IMMUTABLE)
 
+            views.setOnClickPendingIntent(R.id.settings_button, openSettingsPendingIntent)
 
             if (noti != null) {
 
@@ -92,9 +89,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 else views.setImageViewResource(R.id.play_button, R.drawable.play_icon)
             } else {
                 // When no music, the text just opens the Music Widget app
-                val pendingIntent =
-                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-                views.setOnClickPendingIntent(R.id.titleText, pendingIntent)
+
+                views.setOnClickPendingIntent(R.id.titleText, openSettingsPendingIntent)
                 // If no notification
                 views.setImageViewIcon(R.id.musicThumbnail, null) // Remove icon
                 views.setTextViewText( // Remove text

@@ -3,8 +3,8 @@
     android:height="30dp"
     android:viewportWidth="30"
     android:viewportHeight="30"
-    android:tint="?attr/colorControlNormal">
+    android:tint="?attr/widgetIconsColor">
   <path
-      android:fillColor="?attr/colorPrimaryVariant"
+      android:fillColor="?attr/widgetIconsColor"
       android:pathData="M6,19h4L10,5L6,5v14zM14,5v14h4L18,5h-4z"/>
 </vector>

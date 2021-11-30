@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="appBackgroundColor" format="reference" />
+    <attr name="appTextColor" format="reference" />
+    <attr name="widgetBackgroundColor" format="reference" />
+    <attr name="widgetTextColor" format="reference" />
+    <attr name="widgetIconsColor" format="reference" />
+</resources>
