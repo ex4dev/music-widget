@@ -13,7 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/appBackgroundColor</item>
         <!-- Customize your theme here. -->
         <item name="widgetBackgroundColor">@color/a2_800</item>
-        <item name="widgetTextColor">@color/n2_200</item>
+        <item name="widgetTitleColor">@color/white</item>
+        <item name="widgetTextColor">@color/n2_100</item>
         <item name="widgetIconsColor">@color/a2_300</item>
         <item name="appBackgroundColor">@color/n1_900</item>
         <item name="appTextColor">@color/n2_300</item>

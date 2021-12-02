@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/music_widget_layout"
+    android:theme="@style/Theme.MusicWidget"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:foregroundGravity="center">
+
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/size_1_background_circle"
+        android:paddingLeft="3dp"
+        android:paddingTop="3dp"
+        android:contentDescription="Play/pause button"
+        android:src="@drawable/play_icon"/>
+
+</RelativeLayout>

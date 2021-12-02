@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-medium"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:paddingHorizontal="10dp"
                 android:text="No media playing"
                 android:textColor="?attr/widgetTitleColor"
@@ -102,20 +102,6 @@
             android:src="@drawable/next_icon"
             android:alpha="0.95" />
     </RelativeLayout>
-
-    <!-- Settings button -->
-    <ImageButton
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="Next song button"
-        android:foregroundGravity="center"
-        android:src="@drawable/settings_icon"
-        android:alpha="0.2" />
 
 
 

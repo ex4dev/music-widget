@@ -16,42 +16,12 @@
             android:id="@+id/musicThumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
             android:background="@drawable/rounded_button"
             android:clipToOutline="true"
             android:contentDescription="Album artwork"
             android:maxWidth="128px"
             android:maxHeight="128px"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/musicThumbnail"
-            android:layout_centerVertical="true">
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:maxLines="1"
-                android:paddingHorizontal="10dp"
-                android:text="No media playing"
-                android:textColor="?attr/widgetTitleColor"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/subtitleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/titleText"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:paddingHorizontal="10dp"
-                android:textColor="?attr/widgetTextColor"
-                android:textSize="13sp" />
-        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -102,20 +72,6 @@
             android:src="@drawable/next_icon"
             android:alpha="0.95" />
     </RelativeLayout>
-
-    <!-- Settings button -->
-    <ImageButton
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="Next song button"
-        android:foregroundGravity="center"
-        android:src="@drawable/settings_icon"
-        android:alpha="0.2" />
 
 
 

@@ -10,9 +10,21 @@
     android:background="?attr/appBackgroundColor">
 
     <TextView
+        android:id="@+id/app_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Music Widget"
+        android:textColor="?attr/appTextColor"
+        android:textSize="40sp" />
+
+    <TextView
         android:id="@+id/permission_grant_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/app_header_text"
         android:text="Required Permission"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorPrimaryVariant" />
@@ -33,6 +45,7 @@
         android:layout_below="@+id/permission_explainer_text"
         android:layout_centerHorizontal="true">
     </Button>
+
     <TextView
         android:id="@+id/clear_name_header"
         android:layout_width="wrap_content"
@@ -41,13 +54,14 @@
         android:text="Clear Song"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorPrimaryVariant" />
+
     <TextView
         android:id="@+id/clear_name_explainer_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/clear_name_header"
         android:text="@string/clear_name_explainer_text"
-        android:textColor="?attr/appTextColor"/>
+        android:textColor="?attr/appTextColor" />
     <Button
         android:id="@+id/clear_name_button"
         android:layout_width="wrap_content"
@@ -56,7 +70,6 @@
         android:onClick="clearSong"
         android:layout_below="@+id/clear_name_explainer_text"
         android:layout_centerHorizontal="true"/>
-
 
 
 </RelativeLayout>

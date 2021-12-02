@@ -3,6 +3,7 @@
     <attr name="appBackgroundColor" format="reference" />
     <attr name="appTextColor" format="reference" />
     <attr name="widgetBackgroundColor" format="reference" />
+    <attr name="widgetTitleColor" format="reference" />
     <attr name="widgetTextColor" format="reference" />
     <attr name="widgetIconsColor" format="reference" />
 </resources>

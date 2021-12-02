@@ -18,6 +18,8 @@
     <color name="n1_900">@android:color/system_neutral1_900</color>
     <color name="n1_0">@android:color/system_neutral1_0</color>
     <color name="n1_50">@android:color/system_neutral1_50</color>
+    <color name="n2_100">@android:color/system_neutral2_100</color>
     <color name="n2_200">@android:color/system_neutral2_200</color>
     <color name="n2_300">@android:color/system_neutral2_300</color>
+    <color name="n2_700">@android:color/system_neutral2_700</color>
 </resources>
