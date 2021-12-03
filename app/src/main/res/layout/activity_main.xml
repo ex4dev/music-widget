@@ -62,14 +62,41 @@
         android:layout_below="@+id/clear_name_header"
         android:text="@string/clear_name_explainer_text"
         android:textColor="?attr/appTextColor" />
+
     <Button
         android:id="@+id/clear_name_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear Song and Reload"
-        android:onClick="clearSong"
         android:layout_below="@+id/clear_name_explainer_text"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="clearSong"
+        android:text="Clear Song and Reload" />
+
+    <TextView
+        android:id="@+id/default_app_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/clear_name_button"
+        android:text="Default Music App"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <TextView
+        android:id="@+id/default_app_explainer_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/default_app_header"
+        android:text="Choose which app to open when you tap on the widget and no music is playing. For large widgets, you can still get back to this menu with the icon in the lower right corner."
+        android:textColor="?attr/appTextColor" />
+
+    <Button
+        android:id="@+id/default_app_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/default_app_explainer_text"
+        android:layout_centerHorizontal="true"
+        android:onClick="chooseDefaultApp"
+        android:text="Change Default App" />
 
 
 </RelativeLayout>

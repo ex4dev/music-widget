@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-medium"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:paddingHorizontal="10dp"
                 android:text="No media playing"
                 android:textColor="?attr/widgetTitleColor"

@@ -2,4 +2,5 @@
     <string name="app_name">Music Widget</string>
     <string name="permission_explainer_text">This app needs access to your notifications to view the current song.</string>
     <string name="clear_name_explainer_text">If a song name is stuck, you can clear it with the button below.</string>
+    <string name="config_file">dev.ex4.android.musicwidget.user_configuration</string>
 </resources>

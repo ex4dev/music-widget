@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/size_1_background_circle"
-        android:paddingLeft="3dp"
-        android:paddingTop="3dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="4dp"
         android:contentDescription="Play/pause button"
         android:src="@drawable/play_icon"/>
 

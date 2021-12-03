@@ -46,4 +46,9 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, "Song info cleared from widget.", Toast.LENGTH_SHORT).show()
     }
 
+    fun chooseDefaultApp(view: View) {
+        val intent = Intent(this, AppPickerActivity::class.java)
+        startActivity(intent)
+    }
+
 }
