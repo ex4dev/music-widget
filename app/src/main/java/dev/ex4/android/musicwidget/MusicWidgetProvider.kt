@@ -144,6 +144,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
                 if (sizeMin(views, 3)) {
                     views.setTextViewText(R.id.titleText, "No media playing")
+                    views.setTextViewText(R.id.subtitleText, "")
                     views.setOnClickPendingIntent(R.id.titleText, openSettingsPendingIntent)
                     views.setOnClickPendingIntent(R.id.subtitleText, openSettingsPendingIntent)
                 }
