@@ -6,13 +6,13 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Handler
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
 import android.os.Looper
-
-
+import android.view.View
 
 
 class MusicWidgetProvider : AppWidgetProvider() {
@@ -25,16 +25,23 @@ class MusicWidgetProvider : AppWidgetProvider() {
         if (appWidgetManager == null) return
         for (appWidgetId in appWidgetIds) {
 
+            if (context == null) return
+            val sharedPref =
+                context.getSharedPreferences(
+                    context.getString(R.string.config_file),
+                    Context.MODE_PRIVATE
+                )
+
             var noti = MusicNotiListener.latestNotification
             // Update layout
-            val tinyView = RemoteViews(context?.packageName, R.layout.music_widget_size_1)
-            updateData(context, tinyView, noti)
-            val smallView = RemoteViews(context?.packageName, R.layout.music_widget_size_2)
-            updateData(context, smallView, noti)
-            val mediumView = RemoteViews(context?.packageName, R.layout.music_widget_size_3)
-            updateData(context, mediumView, noti)
-            val largeView = RemoteViews(context?.packageName, R.layout.music_widget)
-            updateData(context, largeView, noti)
+            val tinyView = RemoteViews(context.packageName, R.layout.music_widget_size_1)
+            updateData(context, tinyView, noti, sharedPref, appWidgetId)
+            val smallView = RemoteViews(context.packageName, R.layout.music_widget_size_2)
+            updateData(context, smallView, noti, sharedPref, appWidgetId)
+            val mediumView = RemoteViews(context.packageName, R.layout.music_widget_size_3)
+            updateData(context, mediumView, noti, sharedPref, appWidgetId)
+            val largeView = RemoteViews(context.packageName, R.layout.music_widget)
+            updateData(context, largeView, noti, sharedPref, appWidgetId)
 
             val viewMapping: Map<SizeF, RemoteViews> = mapOf(
                 SizeF(50f, 100f) to tinyView,
@@ -44,9 +51,10 @@ class MusicWidgetProvider : AppWidgetProvider() {
             )
             val views = RemoteViews(viewMapping)
 
+            val reduceStuttering = sharedPref.getBoolean("setting_reduce_stuttering_$appWidgetId", true)
             // Update information
             // updateData(context, views)
-            if (noti != null)
+            if (noti != null || !reduceStuttering)
                 appWidgetManager.updateAppWidget(appWidgetId, views)
             // When the notification was cleared, wait 5 seconds before deciding whether to clear the widget to avoid stuttering
             else if (Looper.myLooper() != null) Handler(Looper.myLooper()!!).postDelayed({
@@ -58,7 +66,21 @@ class MusicWidgetProvider : AppWidgetProvider() {
         }
     }
 
-    fun updateData(context: Context?, views: RemoteViews, noti: Notification?) {
+    fun updateData(context: Context?, views: RemoteViews, noti: Notification?, sharedPref: SharedPreferences, appWidgetId: Int) {
+
+        // Load preferences
+        var settingsIcon = true
+        var roundedCorners = true
+
+        settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
+        roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
+
+        // Rounded corners setting
+        if (sizeMin(views, 2)) views.setInt(R.id.musicThumbnail, "setBackgroundResource", if (roundedCorners) R.drawable.rounded_button else R.drawable.angular_button)
+        // Settings icon setting
+        if (sizeMin(views, 4)) views.setViewVisibility(R.id.settings_button, if (settingsIcon) View.VISIBLE else View.GONE)
+
+
         val openSettingsIntent = Intent(context, MainActivity::class.java)
         val openSettingsPendingIntent =
             PendingIntent.getActivity(
@@ -186,6 +208,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 views.setOnClickPendingIntent(R.id.music_widget_layout, openDefaultAppPendingIntent)
                 views.setImageViewIcon(R.id.musicThumbnail, null)
             }
+            views.setOnClickPendingIntent(R.id.play_button, openDefaultAppPendingIntent)
         }
     }
 

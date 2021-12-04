@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.MusicWidget"
+    tools:context=".WidgetConfigActivity"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:background="?attr/appBackgroundColor">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Configure Widget"
+        android:textColor="?attr/appTextColor"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Important: If this is your first music widget, you must grant permission in the Music Widget app before it can work with all music players."
+        android:textColor="?attr/appTextColor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Default Music App"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open the Music Widget app to choose which app to open when you tap on the widget and no music is playing."
+        android:textColor="?attr/appTextColor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Large Widgets"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/setting_settings_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show settings icon in the lower-right corner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Appearance"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/setting_rounded_corners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable rounded corners for the album artwork" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Reduce Stuttering"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If the widget is flickering when the song changes, this may help. It adds a 5-second delay before clearing the widget."
+        android:textColor="?attr/appTextColor" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/setting_reduce_stuttering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reduce stuttering" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Confirm Changes"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorPrimaryVariant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap the button below to finalize the changes and reload the widget."
+        android:textColor="?attr/appTextColor" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:onClick="confirmConfiguration"/>
+</LinearLayout>

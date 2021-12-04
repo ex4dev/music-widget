@@ -18,5 +18,9 @@
         <item name="widgetIconsColor">@color/a2_300</item>
         <item name="appBackgroundColor">@color/n1_900</item>
         <item name="appTextColor">@color/n2_300</item>
+
+        <item name="colorControlActivated">?attr/colorPrimaryVariant</item>
+        <item name="colorSurface">?attr/colorPrimaryVariant</item>
+        <item name="colorOnSurface">?attr/colorPrimary</item>
     </style>
 </resources>
