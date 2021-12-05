@@ -17,6 +17,7 @@ class WidgetConfigActivity : AppCompatActivity() {
     private var settingsIconSwitch: SwitchMaterial? = null
     private var roundedCornersSwitch: SwitchMaterial? = null
     private var reduceStutteringSwitch: SwitchMaterial? = null
+    private var hideEmptyWidgetSwitch: SwitchMaterial? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         settingsIconSwitch = findViewById(R.id.setting_settings_icon)
         roundedCornersSwitch = findViewById(R.id.setting_rounded_corners)
         reduceStutteringSwitch = findViewById(R.id.setting_reduce_stuttering)
+        hideEmptyWidgetSwitch = findViewById(R.id.setting_hide_empty_widget)
 
         // Put existing values
         val sharedPref =
@@ -45,6 +47,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         settingsIconSwitch?.isChecked = sharedPref.getBoolean("setting_settings_icon_$widgetId", true)
         roundedCornersSwitch?.isChecked = sharedPref.getBoolean("setting_rounded_corners_$widgetId", true)
         reduceStutteringSwitch?.isChecked = sharedPref.getBoolean("setting_reduce_stuttering_$widgetId", true)
+        hideEmptyWidgetSwitch?.isChecked = sharedPref.getBoolean("setting_hide_empty_widget_$widgetId", false)
     }
 
     fun confirmConfiguration(view: View) {
@@ -54,6 +57,7 @@ class WidgetConfigActivity : AppCompatActivity() {
             putBoolean("setting_settings_icon_$widgetId", settingsIconSwitch!!.isChecked)
             putBoolean("setting_rounded_corners_$widgetId", roundedCornersSwitch!!.isChecked)
             putBoolean("setting_reduce_stuttering_$widgetId", reduceStutteringSwitch!!.isChecked)
+            putBoolean("setting_hide_empty_widget_$widgetId", hideEmptyWidgetSwitch!!.isChecked)
             apply()
         }
 

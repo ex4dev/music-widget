@@ -71,9 +71,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
         // Load preferences
         var settingsIcon = true
         var roundedCorners = true
+        var hideEmptyWidget = false
 
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
+        hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
 
         // Rounded corners setting
         if (sizeMin(views, 2)) views.setInt(R.id.musicThumbnail, "setBackgroundResource", if (roundedCorners) R.drawable.rounded_button else R.drawable.angular_button)
@@ -92,18 +94,13 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
         var openDefaultAppIntent = openSettingsIntent
         if (context != null) {
-            val sharedPref =
-                context.getSharedPreferences(
-                    context.getString(R.string.config_file),
-                    Context.MODE_PRIVATE
-                )
-
             val packageManager = context.packageManager
             val packageName = sharedPref.getString("default_player", context.packageName)
             val launchIntent = packageManager.getLaunchIntentForPackage(packageName!!)
             if (launchIntent != null) openDefaultAppIntent =
                 packageManager.getLaunchIntentForPackage(packageName)!!
         }
+
         var openDefaultAppPendingIntent = PendingIntent.getActivity(
             context,
             0,
@@ -118,7 +115,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
         )
 
         if (noti != null) {
-
+            views.setViewVisibility(R.id.music_widget_layout, View.VISIBLE)
             // Set up the song details, including the title, artist, and image
             val title = noti.extras.get(Notification.EXTRA_TITLE)
             val subtext = noti.extras.get(Notification.EXTRA_TEXT)
@@ -196,6 +193,12 @@ class MusicWidgetProvider : AppWidgetProvider() {
         } else {
             // When no music, the text just opens the Music Widget app
             // If no notification
+
+            if (hideEmptyWidget) {
+                views.setViewVisibility(R.id.music_widget_layout, View.GONE)
+                return
+            }
+            views.setViewVisibility(R.id.music_widget_layout, View.VISIBLE)
 
             if (sizeMin(views, 3)) {
                 views.setTextViewText(R.id.titleText, "No media playing")

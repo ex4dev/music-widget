@@ -51,7 +51,8 @@
         android:id="@+id/setting_settings_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show settings icon in the lower-right corner" />
+        android:text="Show settings icon in the lower-right corner"
+        android:textColor="?attr/appTextColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +66,15 @@
         android:id="@+id/setting_rounded_corners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enable rounded corners for the album artwork" />
+        android:text="Enable rounded corners for the album artwork"
+        android:textColor="?attr/appTextColor" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/setting_hide_empty_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hide the widget when no media is playing"
+        android:textColor="?attr/appTextColor" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +94,8 @@
         android:id="@+id/setting_reduce_stuttering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reduce stuttering" />
+        android:text="Reduce stuttering"
+        android:textColor="?attr/appTextColor" />
 
     <TextView
         android:layout_width="wrap_content"
