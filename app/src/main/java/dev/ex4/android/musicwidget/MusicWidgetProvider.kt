@@ -76,6 +76,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
         hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
+        var permissionGranted = sharedPref.getBoolean("permission_granted", false)
 
         // Rounded corners setting
         if (sizeMin(views, 2)) views.setInt(R.id.musicThumbnail, "setBackgroundResource", if (roundedCorners) R.drawable.rounded_button else R.drawable.angular_button)
@@ -193,6 +194,16 @@ class MusicWidgetProvider : AppWidgetProvider() {
         } else {
             // When no music, the text just opens the Music Widget app
             // If no notification
+            if (!permissionGranted) {
+                if (sizeMin(views, 2)) {
+                    views.setTextViewText(R.id.titleText, "Tap to fix permissions")
+                    views.setTextViewText(R.id.subtitleText, "")
+                    views.setOnClickPendingIntent(R.id.titleText, openSettingsPendingIntent)
+                }
+                views.setOnClickPendingIntent(R.id.music_widget_layout, openSettingsPendingIntent)
+                views.setOnClickPendingIntent(R.id.play_button, openSettingsPendingIntent)
+                return
+            }
 
             if (hideEmptyWidget) {
                 views.setViewVisibility(R.id.music_widget_layout, View.GONE)

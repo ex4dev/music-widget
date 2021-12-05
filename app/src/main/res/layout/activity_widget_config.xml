@@ -22,12 +22,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Important: If this is your first music widget, you must grant permission in the Music Widget app before it can work with all music players."
-        android:textColor="?attr/appTextColor" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="Default Music App"
         android:fontFamily="sans-serif-medium"
@@ -36,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Open the Music Widget app to choose which app to open when you tap on the widget and no music is playing."
+        android:text="Open the Music Widget app to choose the default music player."
         android:textColor="?attr/appTextColor" />
 
     <TextView
