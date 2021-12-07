@@ -144,18 +144,19 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
             for (action in noti.actions) {
                 Log.v("MusicNotificationListener", "Action: " + action.title)
+                val actionTitle = action.title.toString().lowercase()
                 when {
-                    action.title.toString().lowercase().contains("previous") -> backIntent =
+                    actionTitle.contains("previous") -> backIntent =
                         action.actionIntent
-                    action.title.toString().lowercase().contains("play") -> {
+                    actionTitle.contains("play") && actionTitle != "don't play this" -> {
                         playPauseIntent = action.actionIntent
                         playPauseIcon = "play"
                     }
-                    action.title.toString().lowercase().contains("pause") -> {
+                    actionTitle.contains("pause") -> {
                         playPauseIntent = action.actionIntent
                         playPauseIcon = "pause"
                     }
-                    action.title.toString().lowercase().contains("next") -> forwardIntent =
+                    actionTitle.contains("next") -> forwardIntent =
                         action.actionIntent
                 }
             }
