@@ -44,7 +44,7 @@ class MusicNotiListener : NotificationListenerService() {
         if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return
 
         if (latestNotification != null)
-            if (sbn.notification.tickerText.equals(latestNotification?.tickerText)) {
+            if (sbn.notification.tickerText != null && sbn.notification.tickerText.equals(latestNotification?.tickerText)) {
                 latestNotification = null;
             }
         reloadWidget()

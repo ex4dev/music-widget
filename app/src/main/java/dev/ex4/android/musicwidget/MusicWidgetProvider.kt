@@ -142,6 +142,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
             var openAppIntent: PendingIntent? = null
             var playPauseIcon: String? = "play"
 
+            if (noti.actions != null)
             for (action in noti.actions) {
                 Log.v("MusicNotificationListener", "Action: " + action.title)
                 val actionTitle = action.title.toString().lowercase()
