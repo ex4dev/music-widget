@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class WidgetConfigActivity : AppCompatActivity() {
@@ -37,6 +39,9 @@ class WidgetConfigActivity : AppCompatActivity() {
         reduceStutteringSwitch = findViewById(R.id.setting_reduce_stuttering)
         hideEmptyWidgetSwitch = findViewById(R.id.setting_hide_empty_widget)
 
+        val grantPermissionButton = findViewById<Button>(R.id.permission_grant_button)
+
+
         // Put existing values
         val sharedPref =
             applicationContext.getSharedPreferences(
@@ -48,6 +53,8 @@ class WidgetConfigActivity : AppCompatActivity() {
         roundedCornersSwitch?.isChecked = sharedPref.getBoolean("setting_rounded_corners_$widgetId", true)
         reduceStutteringSwitch?.isChecked = sharedPref.getBoolean("setting_reduce_stuttering_$widgetId", true)
         hideEmptyWidgetSwitch?.isChecked = sharedPref.getBoolean("setting_hide_empty_widget_$widgetId", false)
+
+        grantPermissionButton.visibility = if (sharedPref.getBoolean("permission_granted", false)) View.GONE else View.VISIBLE
     }
 
     fun confirmConfiguration(view: View) {
@@ -75,5 +82,50 @@ class WidgetConfigActivity : AppCompatActivity() {
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
         setResult(RESULT_OK, resultValue)
         finish()
+    }
+
+    fun grantNotificationPermission(view: View) {
+        val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+        startActivity(intent)
+
+        val sharedPref = getSharedPreferences(getString(R.string.config_file), Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putBoolean("permission_granted", true)
+            apply()
+        }
+
+        reloadWidget()
+
+        val toast = Toast(applicationContext)
+        toast.setText("Give permission to \"Music Widget\" to access notifications")
+        toast.show()
+
+    }
+
+    fun clearSong(view: View) {
+        MusicNotiListener.latestNotification = null
+
+        // Reload the widget
+        reloadWidget()
+
+        // Send success message
+        Toast.makeText(applicationContext, "Song info cleared from widget.", Toast.LENGTH_SHORT).show()
+    }
+
+    fun chooseDefaultApp(view: View) {
+        val intent = Intent(this, AppPickerActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun reloadWidget() {
+        val intent = Intent(this, MusicWidgetProvider::class.java)
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
+            ComponentName(
+                applicationContext, MusicWidgetProvider::class.java
+            )
+        )
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        sendBroadcast(intent)
     }
 }

@@ -80,12 +80,10 @@ class MusicWidgetProvider : AppWidgetProvider() {
         var settingsIcon = true
         var roundedCorners = true
         var hideEmptyWidget = false
-        var reduceStuttering = true
 
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
         hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
-        reduceStuttering = sharedPref.getBoolean("setting_reduce_suttering_$appWidgetId", reduceStuttering)
         var permissionGranted = sharedPref.getBoolean("permission_granted", false)
 
         // Rounded corners setting
@@ -94,7 +92,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
         if (sizeMin(views, 4)) views.setViewVisibility(R.id.settings_button, if (settingsIcon) View.VISIBLE else View.GONE)
 
 
-        val openSettingsIntent = Intent(context, MainActivity::class.java)
+        val openSettingsIntent = Intent(context, WidgetConfigActivity::class.java)
+        openSettingsIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         val openSettingsPendingIntent =
             PendingIntent.getActivity(
                 context,

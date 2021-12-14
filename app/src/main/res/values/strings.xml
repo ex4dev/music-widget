@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">Music Widget</string>
-    <string name="permission_explainer_text">This app needs access to your notifications to view the current song.</string>
-    <string name="clear_name_explainer_text">If a song name is stuck, you can clear it with the button below.</string>
+
+
+    <string name="permission_header_text">Required Permission</string>
+    <string name="permission_explainer_text">This app needs access to your notifications to view the current song. If you have not granted permission yet, tap here.</string>
+    <string name="clear_name_header_text">Clear Song</string>
+    <string name="clear_name_explainer_text">If a song name is stuck, you can clear it by tapping here.</string>
     <string name="config_file">dev.ex4.android.musicwidget.user_configuration</string>
+    <string name="configure_widget_header_text">Configure Widget</string>
+    <string name="permission_button_text">Grant Permission</string>
+    <string name="default_app_header_text">Default Music App</string>
+    <string name="default_app_explainer_text">Tap to choose which app to open when you tap on the widget and no music is playing. For large widgets, you can still get back to this menu with the icon in the lower right corner.</string>
+    <string name="large_widgets_header_text">Large Widgets</string>
+    <string name="show_settings_icon_switch_text">Show settings icon in the lower-right corner</string>
+    <string name="appearance_header_text">Appearance</string>
+    <string name="rounded_corners_switch_text">Enable rounded corners for the album artwork</string>
+    <string name="hide_widget_switch_text">Hide the widget when no media is playing</string>
+    <string name="reduce_stuttering_header_text">Reduce Stuttering</string>
+    <string name="reduce_stuttering_explainer_text">If the widget is flickering when the song changes, this may help. It adds a slight delay before updating the widget.</string>
+    <string name="reduce_stuttering_switch_text">Reduce stuttering</string>
+    <string name="confirm_header_text">Confirm Changes</string>
+    <string name="confirm_explainer_text">Tap the button below to finalize the changes and reload the widget.</string>
+    <string name="confirm_button_text">Confirm</string>
 </resources>

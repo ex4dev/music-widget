@@ -36,13 +36,12 @@ class AppPickerActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, appNamesList.keys.toList().sorted())
         appsList.adapter = adapter
 
-        appsList.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-            val intent = Intent(this@AppPickerActivity, MainActivity::class.java)
-            startActivity(intent)
+        appsList.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val entry = parent.adapter.getItem(position).toString()
             Toast.makeText(applicationContext, "Default music app set to $entry", Toast.LENGTH_SHORT).show()
             setDefaultMusicApp(appNamesList[entry]!!)
-        })
+            finish()
+        }
 
     }
 

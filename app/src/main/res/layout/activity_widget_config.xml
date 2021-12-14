@@ -1,113 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MusicWidget"
-    tools:context=".WidgetConfigActivity"
-    android:padding="15dp"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="?attr/appBackgroundColor">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Configure Widget"
-        android:textColor="?attr/appTextColor"
-        android:textSize="40sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Default Music App"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open the Music Widget app to choose the default music player."
-        android:textColor="?attr/appTextColor" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Large Widgets"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/setting_settings_icon"
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show settings icon in the lower-right corner"
-        android:textColor="?attr/appTextColor"/>
+        android:theme="@style/Theme.MusicWidget"
+        tools:context=".WidgetConfigActivity"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:background="?attr/appBackgroundColor">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/configure_widget_header_text"
+            android:textColor="?attr/appTextColor"
+            android:textSize="40sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Appearance"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
+        <TextView
+            android:id="@+id/permission_grant_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/permission_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/setting_rounded_corners"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable rounded corners for the album artwork"
-        android:textColor="?attr/appTextColor" />
+        <TextView
+            android:id="@+id/permission_explainer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/permission_explainer_text"
+            android:textColor="?attr/appTextColor"
+            android:onClick="grantNotificationPermission" />
+        <Button
+            android:id="@+id/permission_grant_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/permission_button_text"
+            android:onClick="grantNotificationPermission">
+        </Button>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/setting_hide_empty_widget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hide the widget when no media is playing"
-        android:textColor="?attr/appTextColor" />
+        <TextView
+            android:id="@+id/clear_name_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/clear_name_header_text"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:paddingTop="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Reduce Stuttering"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
+        <TextView
+            android:id="@+id/clear_name_explainer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_name_explainer_text"
+            android:textColor="?attr/appTextColor"
+            android:onClick="clearSong"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="If the widget is flickering when the song changes, this may help. It adds a slight delay before updating the widget."
-        android:textColor="?attr/appTextColor" />
+        <TextView
+            android:id="@+id/default_app_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_app_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:paddingTop="20dp" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/setting_reduce_stuttering"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reduce stuttering"
-        android:textColor="?attr/appTextColor" />
+        <TextView
+            android:id="@+id/default_app_explainer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_app_explainer_text"
+            android:textColor="?attr/appTextColor"
+            android:onClick="chooseDefaultApp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Confirm Changes"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
+        <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/large_widgets_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant" /> -->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tap the button below to finalize the changes and reload the widget."
-        android:textColor="?attr/appTextColor" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:onClick="confirmConfiguration"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/customization_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Customize"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:paddingTop="20dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/setting_settings_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_settings_icon_switch_text"
+            android:textColor="?attr/appTextColor"/>
+
+        <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/appearance_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant" /> -->
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/setting_rounded_corners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rounded_corners_switch_text"
+            android:textColor="?attr/appTextColor" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/setting_hide_empty_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hide_widget_switch_text"
+            android:textColor="?attr/appTextColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/reduce_stuttering_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reduce_stuttering_explainer_text"
+            android:textColor="?attr/appTextColor" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/setting_reduce_stuttering"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reduce_stuttering_switch_text"
+            android:textColor="?attr/appTextColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/confirm_header_text"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorPrimaryVariant" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_explainer_text"
+            android:textColor="?attr/appTextColor" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_button_text"
+            android:onClick="confirmConfiguration"/>
+    </LinearLayout>
+</ScrollView>
+
+
+
