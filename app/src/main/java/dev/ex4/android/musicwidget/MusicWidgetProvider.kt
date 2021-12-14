@@ -32,15 +32,21 @@ class MusicWidgetProvider : AppWidgetProvider() {
                     Context.MODE_PRIVATE
                 )
 
-            var noti = MusicNotiListener.latestNotification
+            val reduceStuttering = sharedPref.getBoolean("setting_reduce_stuttering_$appWidgetId", true)
+
+            val noti = MusicNotiListener.latestNotification
+            val notiId = MusicNotiListener.notificationId
+            Log.i("MW", "Notification ID: $notiId")
+
             // Update layout
             val tinyView = RemoteViews(context.packageName, R.layout.music_widget_size_1)
-            updateData(context, tinyView, noti, sharedPref, appWidgetId)
             val smallView = RemoteViews(context.packageName, R.layout.music_widget_size_2)
-            updateData(context, smallView, noti, sharedPref, appWidgetId)
             val mediumView = RemoteViews(context.packageName, R.layout.music_widget_size_3)
-            updateData(context, mediumView, noti, sharedPref, appWidgetId)
             val largeView = RemoteViews(context.packageName, R.layout.music_widget)
+
+            updateData(context, tinyView, noti, sharedPref, appWidgetId)
+            updateData(context, smallView, noti, sharedPref, appWidgetId)
+            updateData(context, mediumView, noti, sharedPref, appWidgetId)
             updateData(context, largeView, noti, sharedPref, appWidgetId)
 
             val viewMapping: Map<SizeF, RemoteViews> = mapOf(
@@ -51,18 +57,20 @@ class MusicWidgetProvider : AppWidgetProvider() {
             )
             val views = RemoteViews(viewMapping)
 
-            val reduceStuttering = sharedPref.getBoolean("setting_reduce_stuttering_$appWidgetId", true)
-            // Update information
-            // updateData(context, views)
-            if (noti != null || !reduceStuttering)
-                appWidgetManager.updateAppWidget(appWidgetId, views)
-            // When the notification was cleared, wait 5 seconds before deciding whether to clear the widget to avoid stuttering
+
+
+            if (noti != null && Looper.myLooper() != null) Handler(Looper.myLooper()!!).postDelayed({
+                if (MusicNotiListener.latestNotification == noti) {
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                }
+            }, if (reduceStuttering) 250 else 0)
+            // When the notification was cleared, wait 2 seconds before deciding whether to clear the widget to avoid stuttering
             else if (Looper.myLooper() != null) Handler(Looper.myLooper()!!).postDelayed({
                 Log.i("MW", "Clearing music widget.")
                 if (MusicNotiListener.latestNotification == null)
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                 // else Log.i("MW", "Notification received within 5 second of being cleared.")
-            }, 5000)
+            }, if (reduceStuttering) 2000 else 0)
         }
     }
 
@@ -72,10 +80,12 @@ class MusicWidgetProvider : AppWidgetProvider() {
         var settingsIcon = true
         var roundedCorners = true
         var hideEmptyWidget = false
+        var reduceStuttering = true
 
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
         hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
+        reduceStuttering = sharedPref.getBoolean("setting_reduce_suttering_$appWidgetId", reduceStuttering)
         var permissionGranted = sharedPref.getBoolean("permission_granted", false)
 
         // Rounded corners setting

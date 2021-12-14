@@ -22,6 +22,7 @@ class MusicNotiListener : NotificationListenerService() {
         if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return // Check for media notification
 
         latestNotification = sbn.notification;
+        notificationId = sbn.id
         Log.i("MW", "New song notification: " + sbn.notification.tickerText)
 
 
@@ -63,5 +64,7 @@ class MusicNotiListener : NotificationListenerService() {
     companion object {
         @JvmStatic
         var latestNotification: Notification? = null
+        @JvmStatic
+        var notificationId: Int = 0
     }
 }

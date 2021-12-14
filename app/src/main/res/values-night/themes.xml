@@ -15,7 +15,7 @@
         <item name="widgetBackgroundColor">@color/a2_800</item>
         <item name="widgetTitleColor">@color/white</item>
         <item name="widgetTextColor">@color/n2_100</item>
-        <item name="widgetIconsColor">@color/a2_300</item>
+        <item name="widgetIconsColor">@color/main_100</item>
         <item name="appBackgroundColor">@color/n1_900</item>
         <item name="appTextColor">@color/n2_300</item>
 

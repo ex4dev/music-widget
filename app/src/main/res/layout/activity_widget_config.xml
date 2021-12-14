@@ -81,7 +81,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If the widget is flickering when the song changes, this may help. It adds a 5-second delay before clearing the widget."
+        android:text="If the widget is flickering when the song changes, this may help. It adds a slight delay before updating the widget."
         android:textColor="?attr/appTextColor" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
