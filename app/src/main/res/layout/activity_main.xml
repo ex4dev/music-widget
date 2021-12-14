@@ -21,12 +21,19 @@
         android:textSize="40sp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For more settings, long press on a widget and tap the configuration button."
+        android:textColor="?attr/appTextColor" />
+
+    <TextView
         android:id="@+id/permission_grant_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Required Permission"
         android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
+        android:textColor="?attr/colorPrimaryVariant"
+        android:paddingTop="20dp"/>
 
     <TextView
         android:id="@+id/permission_explainer_text"
@@ -48,7 +55,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="Clear Song"
-        android:textColor="?attr/colorPrimaryVariant" />
+        android:textColor="?attr/colorPrimaryVariant"
+        android:paddingTop="20dp"/>
 
     <TextView
         android:id="@+id/clear_name_explainer_text"
@@ -70,7 +78,8 @@
         android:layout_height="wrap_content"
         android:text="Default Music App"
         android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorPrimaryVariant" />
+        android:textColor="?attr/colorPrimaryVariant"
+        android:paddingTop="20dp"/>
 
     <TextView
         android:id="@+id/default_app_explainer_text"
