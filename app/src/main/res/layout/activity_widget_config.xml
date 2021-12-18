@@ -129,6 +129,13 @@
             android:text="@string/hide_widget_switch_text"
             android:textColor="?attr/appTextColor" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/setting_update_paused"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't update the widget with paused media"
+            android:textColor="?attr/appTextColor" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

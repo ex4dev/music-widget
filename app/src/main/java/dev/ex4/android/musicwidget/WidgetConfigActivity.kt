@@ -20,6 +20,7 @@ class WidgetConfigActivity : AppCompatActivity() {
     private var roundedCornersSwitch: SwitchMaterial? = null
     private var reduceStutteringSwitch: SwitchMaterial? = null
     private var hideEmptyWidgetSwitch: SwitchMaterial? = null
+    private var updatePausedSwitch: SwitchMaterial? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         roundedCornersSwitch = findViewById(R.id.setting_rounded_corners)
         reduceStutteringSwitch = findViewById(R.id.setting_reduce_stuttering)
         hideEmptyWidgetSwitch = findViewById(R.id.setting_hide_empty_widget)
+        updatePausedSwitch = findViewById(R.id.setting_update_paused)
 
         val grantPermissionButton = findViewById<Button>(R.id.permission_grant_button)
 
@@ -53,6 +55,7 @@ class WidgetConfigActivity : AppCompatActivity() {
         roundedCornersSwitch?.isChecked = sharedPref.getBoolean("setting_rounded_corners_$widgetId", true)
         reduceStutteringSwitch?.isChecked = sharedPref.getBoolean("setting_reduce_stuttering_$widgetId", true)
         hideEmptyWidgetSwitch?.isChecked = sharedPref.getBoolean("setting_hide_empty_widget_$widgetId", false)
+        updatePausedSwitch?.isChecked = !sharedPref.getBoolean("setting_update_paused_$widgetId", false)
 
         grantPermissionButton.visibility = if (sharedPref.getBoolean("permission_granted", false)) View.GONE else View.VISIBLE
     }
@@ -65,6 +68,7 @@ class WidgetConfigActivity : AppCompatActivity() {
             putBoolean("setting_rounded_corners_$widgetId", roundedCornersSwitch!!.isChecked)
             putBoolean("setting_reduce_stuttering_$widgetId", reduceStutteringSwitch!!.isChecked)
             putBoolean("setting_hide_empty_widget_$widgetId", hideEmptyWidgetSwitch!!.isChecked)
+            putBoolean("setting_update_paused_$widgetId", !(updatePausedSwitch!!.isChecked))
             apply()
         }
 

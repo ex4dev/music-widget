@@ -4,18 +4,50 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
 import android.os.Looper
+import android.service.notification.StatusBarNotification
 import android.view.View
 
 
 class MusicWidgetProvider : AppWidgetProvider() {
+
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        super.onReceive(context, intent)
+        if (intent == null || context == null) return
+        if (intent.action != context.getString(R.string.widget_update_intent)) return
+
+
+        val extras = intent.extras
+        if (extras != null) {
+            val appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS)
+
+            latestNotification = extras.getParcelable("notificationObject") as Notification?
+            latestTimestamp = extras.getLong("notificationTime", 0)
+            hideLatestNotification = extras.getBoolean("hideLatestNotification", false)
+
+            if (appWidgetIds != null && appWidgetIds.isNotEmpty()) {
+                onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds)
+            }
+        }
+
+    }
+
+    var latestNotification: Notification? = null
+    var latestTimestamp = 0L
+    var hideLatestNotification = false
+
+
+
     override fun onUpdate(
         context: Context?,
         appWidgetManager: AppWidgetManager?,
@@ -34,9 +66,8 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
             val reduceStuttering = sharedPref.getBoolean("setting_reduce_stuttering_$appWidgetId", true)
 
-            val noti = MusicNotiListener.latestNotification
-            val notiId = MusicNotiListener.notificationId
-            Log.i("MW", "Notification ID: $notiId")
+            val noti = latestNotification
+            val notiTime = latestTimestamp
 
             // Update layout
             val tinyView = RemoteViews(context.packageName, R.layout.music_widget_size_1)
@@ -59,11 +90,15 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
 
 
+
+            // appWidgetManager.updateAppWidget(appWidgetId, views)
+
             if (noti != null && Looper.myLooper() != null) Handler(Looper.myLooper()!!).postDelayed({
-                if (MusicNotiListener.latestNotification == noti) {
+                if (notiTime == MusicNotiListener.latestTimestamp) {
+                    Log.i("MW", "Loading noti")
                     appWidgetManager.updateAppWidget(appWidgetId, views)
-                }
-            }, if (reduceStuttering) 250 else 0)
+                } else Log.i("MW", "Notification changed recently")
+            }, if (reduceStuttering) 20 else 0)
             // When the notification was cleared, wait 2 seconds before deciding whether to clear the widget to avoid stuttering
             else if (Looper.myLooper() != null) Handler(Looper.myLooper()!!).postDelayed({
                 Log.i("MW", "Clearing music widget.")
@@ -80,12 +115,19 @@ class MusicWidgetProvider : AppWidgetProvider() {
         var settingsIcon = true
         var roundedCorners = true
         var hideEmptyWidget = false
+        var updateWhenPaused = true
 
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
         hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
+        updateWhenPaused = sharedPref.getBoolean("setting_update_paused_$appWidgetId", updateWhenPaused)
+
         var permissionGranted = sharedPref.getBoolean("permission_granted", false)
 
+        if (!updateWhenPaused && hideLatestNotification) {
+            Log.i("MW", "Unsafe to update: ${latestNotification?.tickerText}")
+            return
+        }
         // Rounded corners setting
         if (sizeMin(views, 2)) views.setInt(R.id.musicThumbnail, "setBackgroundResource", if (roundedCorners) R.drawable.rounded_button else R.drawable.angular_button)
         // Settings icon setting
@@ -155,6 +197,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
             for (action in noti.actions) {
                 Log.v("MusicNotificationListener", "Action: " + action.title)
                 val actionTitle = action.title.toString().lowercase()
+                val paused = isPaused(noti)
                 when {
                     actionTitle.contains("previous") -> backIntent =
                         action.actionIntent
@@ -234,6 +277,22 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 views.setImageViewIcon(R.id.musicThumbnail, null)
             }
             views.setOnClickPendingIntent(R.id.play_button, openDefaultAppPendingIntent)
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun isPaused(noti: Notification): Boolean {
+            for (action in noti.actions) {
+                val actionTitle = action.title.toString().lowercase()
+                if (actionTitle.contains("play") && actionTitle != "don't play this") {
+                    return true
+                }
+                if (actionTitle.contains("pause")) {
+                    return false
+                }
+            }
+            return false
         }
     }
 

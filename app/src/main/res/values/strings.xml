@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Music Widget</string>
 
+    <string name="widget_update_intent">dev.ex4.android.musicwidget.UPDATE_MUSIC_WIDGET</string>
+
 
     <string name="permission_header_text">Required Permission</string>
     <string name="permission_explainer_text">This app needs access to your notifications to view the current song. If you have not granted permission yet, tap here.</string>
