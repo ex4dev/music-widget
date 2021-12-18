@@ -81,10 +81,10 @@ class MusicWidgetProvider : AppWidgetProvider() {
             updateData(context, largeView, noti, sharedPref, appWidgetId)
 
             val viewMapping: Map<SizeF, RemoteViews> = mapOf(
-                SizeF(50f, 100f) to tinyView,
-                SizeF(130f, 100f) to smallView,
-                SizeF(200f, 100f) to mediumView,
-                SizeF(270f, 100f) to largeView
+                SizeF(50f, 0f) to tinyView,
+                SizeF(130f, 0f) to smallView,
+                SizeF(200f, 0f) to mediumView,
+                SizeF(270f, 0f) to largeView
             )
             val views = RemoteViews(viewMapping)
 
@@ -116,11 +116,13 @@ class MusicWidgetProvider : AppWidgetProvider() {
         var roundedCorners = true
         var hideEmptyWidget = false
         var updateWhenPaused = true
+        var oneLineOnly = false
 
         settingsIcon = sharedPref.getBoolean("setting_settings_icon_$appWidgetId", settingsIcon)
         roundedCorners = sharedPref.getBoolean("setting_rounded_corners_$appWidgetId", roundedCorners)
         hideEmptyWidget = sharedPref.getBoolean("setting_hide_empty_widget_$appWidgetId", hideEmptyWidget)
         updateWhenPaused = sharedPref.getBoolean("setting_update_paused_$appWidgetId", updateWhenPaused)
+        oneLineOnly = sharedPref.getBoolean("setting_one_line_only_$appWidgetId", oneLineOnly)
 
         var permissionGranted = sharedPref.getBoolean("permission_granted", false)
 
@@ -173,14 +175,6 @@ class MusicWidgetProvider : AppWidgetProvider() {
             val subtext = noti.extras.get(Notification.EXTRA_TEXT)
             val icon = noti.getLargeIcon()
 
-            if (sizeMin(views, 3)) {
-                views.setTextViewText(
-                    R.id.titleText,
-                    // noti.tickerText
-                    "$title"
-                )
-                views.setTextViewText(R.id.subtitleText, "$subtext")
-            }
             if (sizeMin(views, 2)) views.setImageViewIcon(R.id.musicThumbnail, icon)
             for (key in noti.extras.keySet()) {
                 Log.i("MusicWidgetProvider", key + "=" + noti.extras.get(key).toString())
@@ -216,30 +210,33 @@ class MusicWidgetProvider : AppWidgetProvider() {
 
             openAppIntent = noti.contentIntent
 
-            if (sizeMin(
-                    views,
-                    2
-                ) && backIntent != null
-            ) views.setOnClickPendingIntent(R.id.back_button, backIntent)
+            if (sizeMin(views, 2)) {
+                if (backIntent != null) views.setOnClickPendingIntent(R.id.back_button, backIntent)
+                if (forwardIntent != null) views.setOnClickPendingIntent(R.id.next_button, forwardIntent)
+                if (openAppIntent != null) views.setOnClickPendingIntent(R.id.musicThumbnail, openAppIntent)
+            }
+
+            if (sizeMin(views, 3)) {
+                if (openAppIntent != null) {
+                    views.setOnClickPendingIntent(R.id.titleText, openAppIntent)
+                    views.setOnClickPendingIntent(R.id.subtitleText, openAppIntent)
+                }
+                views.setTextViewText(
+                    R.id.titleText,
+                    // noti.tickerText
+                    "$title"
+                )
+                views.setTextViewText(R.id.subtitleText, "$subtext")
+                views.setInt(R.id.titleText, "setMaxLines", if (oneLineOnly) 1 else 2)
+            }
+
             if (playPauseIntent != null) views.setOnClickPendingIntent(
                 R.id.play_button,
                 playPauseIntent
             )
-            if (sizeMin(views, 2) && forwardIntent != null) views.setOnClickPendingIntent(
-                R.id.next_button,
-                forwardIntent
-            )
-            if (openAppIntent != null) {
-                if (sizeMin(views, 3)) {
-                    views.setOnClickPendingIntent(R.id.titleText, openAppIntent)
-                    views.setOnClickPendingIntent(R.id.subtitleText, openAppIntent)
-                }
-                if (sizeMin(views, 2)) views.setOnClickPendingIntent(
-                    R.id.musicThumbnail,
-                    openAppIntent
-                )
+            if (openAppIntent != null)
                 views.setOnClickPendingIntent(R.id.music_widget_layout, openAppIntent)
-            }
+
             if (playPauseIcon == "pause") views.setImageViewResource(
                 R.id.play_button,
                 R.drawable.pause_icon
