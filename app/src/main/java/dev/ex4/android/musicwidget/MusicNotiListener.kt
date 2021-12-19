@@ -48,7 +48,9 @@ class MusicNotiListener : NotificationListenerService() {
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
         if (sbn.notification.category != Notification::CATEGORY_TRANSPORT.get()) return
 
+        // if (sbn.packageName == latestUnpausedSBN?.packageName) latestNotification = null
         if (sbn.notification.extras.getString(Notification.EXTRA_MEDIA_SESSION).equals(sbn.notification.extras.getString(Notification.EXTRA_MEDIA_SESSION))) {
+            latestNotification = null
             reloadWidget(null, System.currentTimeMillis(), false)
         }
 

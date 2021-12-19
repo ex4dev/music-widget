@@ -73,18 +73,21 @@ class MusicWidgetProvider : AppWidgetProvider() {
             val tinyView = RemoteViews(context.packageName, R.layout.music_widget_size_1)
             val smallView = RemoteViews(context.packageName, R.layout.music_widget_size_2)
             val mediumView = RemoteViews(context.packageName, R.layout.music_widget_size_3)
-            val largeView = RemoteViews(context.packageName, R.layout.music_widget)
+            val largeView = RemoteViews(context.packageName, R.layout.music_widget) // Normal wide view (4x2, 5x2, etc)
+            val xlView = RemoteViews(context.packageName, R.layout.music_widget_size_5)
 
             updateData(context, tinyView, noti, sharedPref, appWidgetId)
             updateData(context, smallView, noti, sharedPref, appWidgetId)
             updateData(context, mediumView, noti, sharedPref, appWidgetId)
             updateData(context, largeView, noti, sharedPref, appWidgetId)
+            updateData(context, xlView, noti, sharedPref, appWidgetId)
 
             val viewMapping: Map<SizeF, RemoteViews> = mapOf(
                 SizeF(50f, 0f) to tinyView,
                 SizeF(130f, 0f) to smallView,
                 SizeF(200f, 0f) to mediumView,
-                SizeF(270f, 0f) to largeView
+                SizeF(270f, 0f) to largeView,
+                SizeF(200f, 200f) to xlView,
             )
             val views = RemoteViews(viewMapping)
 
@@ -173,6 +176,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
             // Set up the song details, including the title, artist, and image
             val title = noti.extras.get(Notification.EXTRA_TITLE)
             val subtext = noti.extras.get(Notification.EXTRA_TEXT)
+            noti.extras.get(Notification.EXTRA_LARGE_ICON_BIG)
             val icon = noti.getLargeIcon()
 
             if (sizeMin(views, 2)) views.setImageViewIcon(R.id.musicThumbnail, icon)
@@ -274,6 +278,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 views.setImageViewIcon(R.id.musicThumbnail, null)
             }
             views.setOnClickPendingIntent(R.id.play_button, openDefaultAppPendingIntent)
+            views.setImageViewResource(R.id.play_button, R.drawable.play_icon)
         }
     }
 
@@ -294,10 +299,10 @@ class MusicWidgetProvider : AppWidgetProvider() {
     }
 
     fun sizeMin(view: RemoteViews, min: Int): Boolean {
-        if (min == 4) return (view.layoutId == R.layout.music_widget)
-        if (min == 3) return (view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3)
-        if (min == 2) return (view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3 || view.layoutId == R.layout.music_widget_size_2)
-        if (min == 1) return (view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3 || view.layoutId == R.layout.music_widget_size_2 || view.layoutId == R.layout.music_widget_size_1)
+        if (min == 4) return (view.layoutId == R.layout.music_widget_size_5 || view.layoutId == R.layout.music_widget)
+        if (min == 3) return (view.layoutId == R.layout.music_widget_size_5 || view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3)
+        if (min == 2) return (view.layoutId == R.layout.music_widget_size_5 || view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3 || view.layoutId == R.layout.music_widget_size_2)
+        if (min == 1) return (view.layoutId == R.layout.music_widget_size_5 || view.layoutId == R.layout.music_widget || view.layoutId == R.layout.music_widget_size_3 || view.layoutId == R.layout.music_widget_size_2 || view.layoutId == R.layout.music_widget_size_1)
         return false
     }
 }
