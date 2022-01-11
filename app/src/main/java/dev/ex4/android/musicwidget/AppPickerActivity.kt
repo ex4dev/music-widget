@@ -6,25 +6,33 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import android.provider.AlarmClock.EXTRA_MESSAGE
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.provider.AlarmClock
 
 import android.widget.AdapterView.OnItemClickListener
-import android.content.pm.PackageManager
 import android.widget.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 
 
 class AppPickerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_picker)
+        // Transparent navbar
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.apps_list)) { v, insets ->
+            val padding = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = padding.bottom, top = padding.top)
+            // Return the insets so that they keep going down the view hierarchy
+            insets
+        }
 
         val apps = packageManager.getInstalledPackages(0)
-        val appsList: ListView = findViewById(R.id.appsList)
+        val appsList: ListView = findViewById(R.id.apps_list)
         val appNamesList = HashMap<String, ApplicationInfo>() // display name to package name
         for (app in apps) {
             if (app == null) continue

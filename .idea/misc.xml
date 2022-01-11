@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/play_icon.xml" value="0.30128205128205127" />
+        <entry key="app/src/main/res/layout/activity_app_picker.xml" value="0.1311965811965812" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
-        <entry key="app/src/main/res/layout/activity_widget_config.xml" value="0.1707193515704154" />
+        <entry key="app/src/main/res/layout/activity_widget_config.xml" value="0.28435114503816794" />
         <entry key="app/src/main/res/layout/music_widget.xml" value="0.35104166666666664" />
+        <entry key="app/src/main/res/layout/music_widget_size_2.xml" value="0.22146739130434784" />
+        <entry key="app/src/main/res/layout/music_widget_size_3.xml" value="0.24320652173913043" />
+        <entry key="app/src/main/res/layout/music_widget_size_5.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3671875" />
         <entry key="app/src/main/res/xml/music_widget_info.xml" value="0.35104166666666664" />
       </map>

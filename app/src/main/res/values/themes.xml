@@ -22,5 +22,8 @@
         <item name="colorControlActivated">?attr/colorPrimaryVariant</item>
         <item name="colorSurface">?attr/colorPrimaryVariant</item>
         <item name="colorOnSurface">@color/n1_50</item>
+
+        <!-- Transparent nav -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 </resources>

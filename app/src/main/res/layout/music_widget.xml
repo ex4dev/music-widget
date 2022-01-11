@@ -5,7 +5,9 @@
     android:id="@+id/music_widget_layout"
     android:theme="@style/Theme.MusicWidget"
     android:background="?attr/widgetBackgroundColor"
-    android:padding="15dp">
+    android:paddingHorizontal="15dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="5dp">
 
     <RelativeLayout
         android:id="@+id/titleSection"
@@ -59,7 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleSection"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:paddingTop="5dp">
 
         <ImageButton
             android:id="@+id/back_button"
@@ -72,7 +75,6 @@
             android:contentDescription="Previous song button"
             android:foregroundGravity="center"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="5dp"
             android:src="@drawable/previous_icon" />
 
         <ImageButton
@@ -80,13 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:alpha="0.95"
             android:background="@drawable/rounded_button"
             android:contentDescription="Play/pause button"
             android:foregroundGravity="center"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="5dp"
-            android:src="@drawable/play_icon"
-            android:alpha="0.95" />
+            android:src="@drawable/play_icon" />
 
         <ImageButton
             android:id="@+id/next_button"
@@ -98,7 +99,6 @@
             android:contentDescription="Next song button"
             android:foregroundGravity="center"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="5dp"
             android:src="@drawable/next_icon"
             android:alpha="0.95" />
     </RelativeLayout>

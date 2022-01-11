@@ -10,6 +10,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class WidgetConfigActivity : AppCompatActivity() {
@@ -26,6 +30,14 @@ class WidgetConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_widget_config)
+        // Transparent navbar
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.config_layout)) { v, insets ->
+            val padding = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = padding.bottom, top = padding.top)
+            // Return the insets so that they keep going down the view hierarchy
+            insets
+        }
 
         val extras = intent.extras
         if (extras != null) widgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
