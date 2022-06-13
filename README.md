@@ -1,12 +1,13 @@
 # music-widget
 An Android music widget that works with any app. The widget listens for all music notifications and displays them in a Material You-themed interface.<br />
 **Requires**: Android 12
-
+## [Download the latest version](https://github.com/tylerswanson2/music-widget/releases/latest)
 ## Screenshots
-### Light mode
-![Light](https://user-images.githubusercontent.com/31103658/142958530-4330983e-17f7-4cbb-9a56-e3ac1220d8c5.png)
 ### Dark mode
-![Dark](https://user-images.githubusercontent.com/31103658/142958585-118b6126-f764-481a-92aa-189bdcb02000.png)
+<img src="https://user-images.githubusercontent.com/31103658/173401888-8f1326dc-e263-42fe-9973-3ffa3b374aa2.png" width="500" height="156" />
 
-### Home screen
-![Home Screen](https://user-images.githubusercontent.com/31103658/142958296-2df40154-0d75-41ff-8503-3dfd29de9b3c.png)
+### Light mode
+<img src="https://user-images.githubusercontent.com/31103658/173401890-ec29f190-e62d-4232-b2f0-d988dbeda6de.png" width="500" height="156" />
+
+### Settings
+<img src="https://user-images.githubusercontent.com/31103658/173401892-a04bfb10-901e-4bd8-8d86-b6ee0bf05479.png" width="270" height="600" />
